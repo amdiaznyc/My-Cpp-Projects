@@ -1,53 +1,32 @@
-// GradeBook Exercise Project (Fig. 3.7: fig03_07.cpp
-// Instantiating multiple objects of the GradeBook class and using
-// the GradeBook constructer to specify the course name
-// when each GradeBook object is created. 
+// Fig. 3.12: GradeBook.cpp
+// GradeBook member-function definitions. This file contains
+// implementations of the member functions prototyped in GradeBook.h.
 #include <iostream>
-#include <string> // program uses C++ standard string class
+#include "GradeBook.h" // include definition of class GradeBook
 using namespace std;
 
-//GradeBook class definition
-class GradeBook
+// constructor initializes courseName with string supplied as argument
+GradeBook::GradeBook( string name )
 {
-public:
-    // constructor initializes courseName with string supplied as argument
-    GradeBook( string name )
-    {
-        setCourseName( name ); // call set function to initialize courseName
-    } // end GradeBook constructor
+    setCourseName( name ); // call set function to initialize courseName
+} // end GradeBook constructor
 
-    // function to set the course name
-    void setCourseName ( string name )
-    {
-        courseName = name; // store the course name in the object
-    } // end function setCourseName
+// function to set the course name
+void GradeBook::setCourseName ( string name )
+{
+    courseName = name; // store the course name in the object
+} // end function setCourseName
 
-    // function to get the course name
-    string getCourseName()
-    {
-        return courseName; // return object's courseName
-    } // end function getCourseName
+// function to get the course name
+string GradeBook::getCourseName()
+{
+    return courseName; // return object's courseName
+} // end function getCourseName
 
-    // (function that) display(s) a welcome message to the GradeBook user 
-    void displayMessage()
-    {
-        // (this statement) call(s) getCourseName to get the name of the course (courseName) this GradeBook represents
-        cout << "Welcome to the grade book for\n" << getCourseName() 
+// (function that) display(s) a welcome message to the GradeBook user
+void GradeBook::displayMessage()
+{
+    // (this statement) call(s) getCourseName to get the courseName
+    cout << "Welcome to the grade book for\n" << getCourseName() 
         << "!" << endl;
-    } //end function displayMessage
-private:
-    string courseName; // course name for this GradeBook
-}; // end class GradeBook
-
-// function main begins program execution
-int main()
-{
-    // create two GradeBook objects
-    GradeBook gradeBook1( "CS101 Introduction to C++ Programming" );
-    GradeBook gradeBook2( "CS102 Data Structures in C++" );
-
-    // display intial value of courseName for each GradeBook
-    cout << "gradeBook1 created for course: " << gradeBook1.getCourseName()
-    << "\ngradeBook2 created for course: " << gradeBook2.getCourseName()
-    <<endl;
-} // end main
+} //end function displayMessage
