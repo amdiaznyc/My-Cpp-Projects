@@ -1,9 +1,40 @@
+// ***NOTE--This file contains three sections that should be three separate files.
+// But I combined them into one file divided into three sections for each file,
+// because the g++ compiler was not accepting them as separate files.
+// So until I can investigate more I did this and received the correct outcome.***
+
+// This first section (lines 7-24) is the header file GradeBook.h
+// Fig. 4.12: GradeBook.h
+// Definition of class GradeBook that determines a class average.
+// Member functions are defined in GradeBook.cpp
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+// GradeBook class definition
+class GradeBook
+{
+public:
+    GradeBook( string ); // constructor initializes 'course name' object
+    void setCourseName( string ); // function to set the course name
+    string getCourseName(); // function to retrieve the course name
+    void displayMessage(); // display a welcome message
+    void determineClassAverage(); // averages grades entered by the user
+private:
+    string courseName; // course name for this GradeBook
+}; // end class GradeBook
+// End of first section (header file GradeBook.h)
+
+
+
+
+
+// This second secton (lines 32-115) is the source file GradeBook.cpp
 // Fig. 4.13: GradeBook.cpp
 // Member-function definitions for class GradeBook that solves the
 // class average program with sentinel-controlled repetition.
 #include <iostream>
 #include <iomanip> // parameterized stream manipulators
-#include "GradeBook.h" // include definition of class GradeBook
+//#include "GradeBook.h" // include definition of class GradeBook
 using namespace std;
 
 // constructor initializes courseName with string supplied as argument
@@ -67,7 +98,7 @@ void GradeBook::determineClassAverage()
         cin >> grade; // input grade or sentinel value
     } // end while
 
-    // termination phase
+// termination phase
     if ( gradeCounter != 0 ) // if user entered at least one grade...
     {
         // calculate average of all grades entered
@@ -82,3 +113,24 @@ void GradeBook::determineClassAverage()
     else // no grades were entered, so output appropiate message
         cout << "No grades were entered" << endl;
 } // end function determineClassAverage
+// End of second section (source file GradeBook.cpp)
+
+
+
+
+
+// This third section (line 123-135) is the source file fig04-14.cpp
+// Fig. 4.14: fig04_14.cpp
+// Create GradeBook object and invoke it determineClassAverage function.
+//#include "GradeBook.h" // include definition of class GradeBook
+
+int main()
+{
+    // create GradeBook object myGradeBook and
+    // pass course name to constructor
+    GradeBook myGradeBook( "CS101 C++ Programming" );
+
+    myGradeBook.displayMessage(); // display welcome message
+    myGradeBook.determineClassAverage(); // find average of 10 grades
+} // end main
+// End of the third section (source file fig04-14.cpp)

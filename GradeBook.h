@@ -1,4 +1,4 @@
-// Fig. 4.8: GradeBook.h
+// Fig. 4.12: GradeBook.h
 // Definition of class GradeBook that determines a class average.
 // Member functions are defined in GradeBook.cpp
 #include <string> // program uses C++ standard string class
