@@ -1,6 +1,6 @@
 // ***NOTE--This file contains three sections that should be three separate files.
 // But I combined them into one file divided into three sections for each file,
-// because they g++ compiler was not accepting them as separate files.
+// because the g++ compiler was not accepting them as separate files.
 // So until I can investigate more I did this and received the correct outcome.***
 
 // This first section (lines 7-24) is the header file GradeBook.h
@@ -62,6 +62,7 @@ void GradeBook::displayMessage()
         << "!" << endl;
 } //end function displayMessage
 // End of second section (source file GradeBook.cpp)
+
 
 
 
