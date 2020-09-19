@@ -1,6 +1,6 @@
 // ***NOTE--This file contains three sections that should be three separate files.
 // But I combined them into one file divided into three sections for each file,
-// because they g++ compiler was not accepting them as separate files.
+// because the g++ compiler was not accepting them as separate files.
 // So until I can investigate more I did this and received the correct outcome.***
 
 // This first section (lines 7-24) is the header file GradeBook.h
@@ -28,7 +28,7 @@ private:
 
 
 
-// This second section (lines 32-73) is the source file GradeBook.cpp
+// This second section (lines 32-99) is the source file GradeBook.cpp
 // Fig. 4.9: GradeBook.cpp
 //  Member-function definitions for class GradeBook that solves the
 // class average program with counter-controlled repetition.
@@ -103,7 +103,7 @@ void GradeBook::determineClassAverage()
 
 
 
-// This third section (lines 77-89) is the source file fig03_13.cpp
+// This third section (lines 107-119) is the source file fig03_13.cpp
 // Fig. 4.10: fig04_10.cpp
 // Create GradeBook object and invoke its determineClassAverage function.
 //#include "GradeBook.h" // include definition of class GradeBook
