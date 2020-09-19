@@ -1,6 +1,6 @@
-// Fig. 3.15: GradeBook.h
-// GradeBook class definition presents the public interface of
-// the class. Member-function definitions appear in GradeBook.cpp.
+// Fig. 4.8: GradeBook.h
+// Definition of class GradeBook that determines a class average.
+// Member functions are defined in GradeBook.cpp
 #include <string> // program uses C++ standard string class
 using namespace std;
 
@@ -8,13 +8,11 @@ using namespace std;
 class GradeBook
 {
 public:
-    GradeBook( string ); // constructor that initializes a GradeBook object
-    void setCourseName( string ); // function that sets the course name
-    string getCourseName(); // function that gets the course name
-    void displayMessage(); // function that displays a welcome message
+    GradeBook( string ); // constructor initializes 'course name' object
+    void setCourseName( string ); // function to set the course name
+    string getCourseName(); // function to retrieve the course name
+    void displayMessage(); // display a welcome message
+    void determineClassAverage(); // averages grades entered by the user
 private:
     string courseName; // course name for this GradeBook
 }; // end class GradeBook
-
-
-
