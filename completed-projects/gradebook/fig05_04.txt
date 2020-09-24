@@ -1,0 +1,25 @@
+// Section 5.4
+// Examples Using the 'for' Statement
+
+// The following examples show methods of varying the control variable
+// in a 'for' statement. In each case, we write the appropiate 'for'
+// statement header. Note the change in the relational operator
+// for loops that decrement the control variable.
+
+// a) Vary the control variable from 1 to 100 in increments of 1.
+    for ( int i = 1; i <= 100; i++ )
+
+// b) Vary the control variable from 100 down to 1 in decrements of 1.
+    for ( int i = 100; i >= 1; i-- )
+
+// c) Vary the control variable from 7 to 77 in steps of 7.
+    for ( int i = 7; i <= 77; i += 7 )
+
+// d) Vary the control variable from 20 down to 2 in steps of -2.
+    for ( int i = 20; i >= 2; i -= 2 )
+
+// e) Vary the control variable over the following sequences of values: 2, 5, 8, 11, 14, 17.
+    for ( int i = 2; i <= 17; i += 3 )
+
+// f) Vary the control variable over the following sequences of values: 99, 88, 77, 66, 55.
+    for ( int i = 99; i >= 55; i -= 11 )
