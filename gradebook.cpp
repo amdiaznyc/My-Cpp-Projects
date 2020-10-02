@@ -1,32 +1,29 @@
-// Fig. 5.10: GradeBook.cpp
+// Fig. 6.4: GradeBook.cpp
 // Member-function definitions for class GradeBook that
-// uses a 'switch' statement to count A, B, C, D and F grades.
+// determines the maximum of three grades.
 #include <iostream>
-#include "GradeBook.h" // include definition of class GradeBook
 using namespace std;
 
+#include "GradeBook.h" // include definition of class GradeBook
+
 // constructor initializes courseName with string supplied as argument;
-// initializes counter data members to 0
+// initializes maximumGrade to 0
 GradeBook::GradeBook( string name )
 {
     setCourseName( name ); // validate and store courseName
-    aCount = 0; // initialize count of A grades to 0
-    bCount = 0; // initialize count of B grades to 0
-    cCount = 0; // initialize count of C grades to 0
-    dCount = 0; // initialize count of D grades to 0
-    fCount = 0; // initialize count of F grades to 0
+    maximumGrade = 0; // this value will be replaced by the maximum grade
 } // end GradeBook constructor
 
-// function to set the course name; limits name to 25 or fewer character
-void GradeBook::setCourseName ( string name )
+// function to set the course name; limits name to 25 or fewer characters
+void GradeBook::setCourseName( string name )
 {
-    if ( name.length() <= 25 ) // if name has 25 of fewer characters
+    if ( name.length() <= 25 ) // if name has 25 or fewer characters
         courseName = name; // store the course name in the object
-    else // if name if longer than 25 characters
+    else // if name is longer than 25 characters
     { // set courseName to first 25 characters of parameter name
-        courseName = name.substr( 0, 25 ); // select first 25 character
+        courseName = name.substr( 0, 25 ); // select first 25 characters
         cout << "Name \"" << name << "\" exceeds maximum length (25).\n"
-            << "Limiting courseName to first 25 character.\n" << endl;
+            << "Limiting courseName to first 25 characters.\n" << endl;
     } // end if...else
 } // end function setCourseName
 
@@ -37,7 +34,7 @@ string GradeBook::getCourseName()
 } // end function getCourseName
 
 // display a welcome message to the GradeBook user
-void GradeBook::displayMessage()
+void GradeBook:: displayMessage()
 {
     // this statement calls getCourseName to get the
     // name of the course this GradeBook represents
@@ -45,67 +42,39 @@ void GradeBook::displayMessage()
         << endl;
 } // end function displayMessage
 
-// input arbitrary number of grades from user; update grade counter
+// input three grades from user; determine maximum
 void GradeBook::inputGrades()
 {
-    int grade; // grade entered by user
+    int grade1; // first grade entered by user
+    int grade2; // second grade entered by user
+    int grade3; // third grade entered by user
 
-    cout << "Enter the letter grades." << endl
-        << "Enter the EOF character to end input." << endl;
+    cout << "Enter three interger grades: ";
+    cin >> grade1 >> grade2 >> grade3;
 
-    // loop until user types end-of-file key sequence
-    while ( ( grade = cin.get() ) != EOF )
-    {
-        // determine which grade was entered
-        switch ( grade ) // switch statement nested in while
-        {
-            case 'A': // grade was uppercase A
-            case 'a': // or lowercase a
-                aCount++; // increment aCount
-                break; // necessary to exit switch
-
-            case 'B': // grade was uppercase B
-            case 'b': // or lowercase b
-                bCount++; // increment bCount
-                break; // exit switch
-
-            case 'C': // grade was uppercase C
-            case 'c': // or lowercase c
-                cCount++; // increment cCount
-                break; // exit switch
-
-            case 'D': // grade was uppercase D
-            case 'd': // or lowercase d
-                dCount++; // increment dCount
-                break; // exit switch
-
-            case 'F': // grade was uppercase F
-            case 'f': // or lowercase f
-                fCount++; // increment fCount
-                break; // exit switch
-
-            case '\n': // ignore newlines,
-            case '\t': // ignore tabs,
-            case ' ': // and ignore spaces in input
-                break; // exit switch
-
-            default: // catch all other characters
-                cout << "Incorrect letter grade entered."
-                    << " Enter a new grade." << endl;
-                break; // optional; will exit switch anyway
-        } // end switch
-    } // end while
+    // store maximum in member maximumGrade
+    maximumGrade = maximum( grade1, grade2, grade3 );
 } // end function inputGrades
+
+// returns the maximum of its three integer parameters
+int GradeBook::maximum( int x, int y, int z )
+{
+    int maximumValue = x; // assume x is the largest to start
+
+    // determine whether y is greater than maximumValue
+    if ( y > maximumValue )
+        maximumValue = y; // make y the new maximumValue
+
+    // determine whether z is greater than maximumValue
+    if ( z > maximumValue )
+        maximumValue = z; // make z ther new maximumValue
+
+    return maximumValue;
+} // end function maximum
 
 // display a report based on the grades entered by user
 void GradeBook::displayGradeReport()
 {
-    // output summary of results
-    cout << "\n\nNumber of students who received each letter grade:"
-        << "\nA: " << aCount // display number of A grades
-        << "\nB: " << bCount // display number of B grades
-        << "\nC: " << cCount // display number of C grades
-        << "\nD: " << dCount // display number of D grades
-        << "\nF: " << fCount // display number of F grades
-        << endl;
+    // output maximum of grades entered
+    cout << "Maximum of grades entered: " << maximumGrade << endl;
 } // end function displayGradeReport
