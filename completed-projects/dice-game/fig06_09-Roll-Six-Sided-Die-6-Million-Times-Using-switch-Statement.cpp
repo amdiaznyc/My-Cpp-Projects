@@ -1,5 +1,5 @@
 // Fig. 6.9: fig06_09.cpp
-// Roll a six-sided die 6,000,000 times.
+// Roll a six-sided die 6,000,000 times using the 'switch' statement.
 #include <iostream>
 #include <iomanip>
 #include <cstdlib> // contains function prototype for rand
