@@ -1,5 +1,5 @@
 // Fig. 7.14: fig07_14.cpp
-// Demonstrating the const type qualifier.
+// Demonstrating the const type qualifier to produce an error message.
 #include <iostream>
 using namespace std;
 
