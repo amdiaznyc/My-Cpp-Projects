@@ -1,30 +1,25 @@
-// Fig. 6.4: GradeBook.cpp
+// Fig. 7.16: GradeBook.cpp
 // Member-function definitions for class GradeBook that
-// determines the maximum of three grades.
+// uses an array to store test grades.
 #include <iostream>
+#include <iomanip>
+#include "GradeBook.h" // GradeBook class definition
 using namespace std;
 
-#include "GradeBook.h" // include definition of class GradeBook
-
-// constructor initializes courseName with string supplied as argument;
-// initializes maximumGrade to 0
-GradeBook::GradeBook( string name )
+// constructor initializes courseName and grade array
+GradeBook::GradeBook( string name, const int gradesArray[] )
 {
-    setCourseName( name ); // validate and store courseName
-    maximumGrade = 0; // this value will be replaced by the maximum grade
+    setCourseName( name ); // initialize courseName
+
+    // copy grades from gradesArray to grades data member
+    for ( int grade = 0; grade < students; grade++ )
+        grades[ grade ] = gradesArray[ grade ];
 } // end GradeBook constructor
 
-// function to set the course name; limits name to 25 or fewer characters
+// function to set the course name 
 void GradeBook::setCourseName( string name )
 {
-    if ( name.length() <= 25 ) // if name has 25 or fewer characters
-        courseName = name; // store the course name in the object
-    else // if name is longer than 25 characters
-    { // set courseName to first 25 characters of parameter name
-        courseName = name.substr( 0, 25 ); // select first 25 characters
-        cout << "Name \"" << name << "\" exceeds maximum length (25).\n"
-            << "Limiting courseName to first 25 characters.\n" << endl;
-    } // end if...else
+    courseName = name; // store the course name
 } // end function setCourseName
 
 // function to retrieve the course name
@@ -38,43 +33,107 @@ void GradeBook:: displayMessage()
 {
     // this statement calls getCourseName to get the
     // name of the course this GradeBook represents
-    cout << "Welcome to the grade book for\n" << getCourseName() << "!\n"
+    cout << "Welcome to the grade book for\n" << getCourseName() << "!"
         << endl;
 } // end function displayMessage
 
-// input three grades from user; determine maximum
-void GradeBook::inputGrades()
+// perform various operations on the data
+void GradeBook::processGrades()
 {
-    int grade1; // first grade entered by user
-    int grade2; // second grade entered by user
-    int grade3; // third grade entered by user
+    outputGrades(); // output grades array
 
-    cout << "Enter three interger grades: ";
-    cin >> grade1 >> grade2 >> grade3;
+    // display average of all grades and minimum and maximum grades
+    cout << "\nClass average is " << setprecision( 2 ) << fixed <<
+        getAverage() << "\nLowest grade is " << getMinimum() <<
+        "\nHighest grade is " << getMaximum() << endl;
 
-    // store maximum in member maximumGrade
-    maximumGrade = maximum( grade1, grade2, grade3 );
-} // end function inputGrades
+    outputBarChart(); // print grade distribution chart
+} // end function processGrades
 
-// returns the maximum of its three integer parameters
-int GradeBook::maximum( int x, int y, int z )
+// find minimum grade
+int GradeBook::getMinimum()
 {
-    int maximumValue = x; // assume x is the largest to start
+    int lowGrade = 100; // assume lowest grade is 100
 
-    // determine whether y is greater than maximumValue
-    if ( y > maximumValue )
-        maximumValue = y; // make y the new maximumValue
+    // loop through grades array
+    for ( int grade = 0; grade < students; grade++ )
+    {
+        // if current grade lower than lowGrade, assign it to lowGrade
+        if ( grades[ grade ] < lowGrade )
+            lowGrade = grades[ grade ]; // new lowest grade
+    } // end 'for' statement
 
-    // determine whether z is greater than maximumValue
-    if ( z > maximumValue )
-        maximumValue = z; // make z ther new maximumValue
+    return lowGrade; // return lowest grade
+} // end function getMinimum
 
-    return maximumValue;
-} // end function maximum
-
-// display a report based on the grades entered by user
-void GradeBook::displayGradeReport()
+// find maximum grade
+int GradeBook::getMaximum()
 {
-    // output maximum of grades entered
-    cout << "Maximum of grades entered: " << maximumGrade << endl;
-} // end function displayGradeReport
+    int highGrade = 0; // assume highest grade is 0
+
+    // loop through grades array
+    for ( int grade = 0; grade < students; grade++ )
+    {
+        // if current grade higher than highGrade, assign it to highGrade
+        if ( grades[ grade ] > highGrade )
+            highGrade = grades[ grade ]; // new highest grade
+    } // end 'for' statement
+
+    return highGrade; // return highest grade
+} // end function getMaximum
+
+// determine average grade for test
+double GradeBook::getAverage()
+{
+    int total = 0; // initialize total
+
+    // sum grades in array
+    for ( int grade = 0; grade < students; grade++ )
+        total += grades[ grade ];
+
+    // return average of grades
+    return static_cast< double >( total ) / students;
+} // end function getAverage
+
+// output bar chart displaying grade distribution
+void GradeBook::outputBarChart()
+{
+    cout << "\nGrade distribution:" << endl;
+
+    // stores frequency of grades in each range of 10 grades
+    const int frequencySize = 11;
+    int frequency[ frequencySize ] = {}; // initialize elements to 0
+
+    // for each grade, increment the appropiate frequency
+    for ( int grade = 0; grade < students; grade++ )
+        frequency[ grades[ grade ] / students ]++;
+
+    // for each grade frequency, print bar in chart
+    for ( int count = 0; count < frequencySize; count++ )
+    {
+        // output bar labels ("0-9:", ..., "90-99:", "100:" )
+        if ( count == 0 )
+            cout << "  0-9: ";
+        else if ( count == 10 )
+            cout << "  100: ";
+        else
+            cout << count * 10 << "-" << ( count * 10 ) + 9 << ": ";
+
+        // print bar of asterisks
+        for ( int stars = 0; stars < frequency[ count ]; stars++ )
+            cout << '*';
+
+        cout << endl; // start a new line of output
+    } // end outer 'for'
+} // end function outputBarChart
+
+// output the contents of the grades array
+void GradeBook::outputGrades()
+{
+    cout << "\nThe grades are:\n\n";
+
+    // output each student's grade
+    for ( int student = 0; student < students; student++ )
+        cout << "Student " << setw( 2 ) << student + 1 << ": " << setw( 3 )
+            << grades[ student ] << endl;
+} // end function outputGrades

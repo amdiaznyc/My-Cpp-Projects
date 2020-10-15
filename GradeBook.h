@@ -1,5 +1,5 @@
-// Fig. 6.3: GradeBook.h
-// Definition of class GradeBook that finds the maximum of three grades.
+// Fig. 7.15: GradeBook.h
+// Definition of class GradeBook that uses an array to store test grades.
 // Member functions are defined in GradeBook.cpp
 #include <string> // program uses C++ standard string class
 using namespace std;
@@ -8,14 +8,22 @@ using namespace std;
 class GradeBook
 {
 public:
-    GradeBook( string ); // constructor initializes 'course name' object
+    // constant -- number of students who took the test
+    static const int students = 10; // note public data
+
+    // constructor initializes course name and array of grades
+    GradeBook( string, const int [] );
+
     void setCourseName( string ); // function to set the course name
     string getCourseName(); // function to retrieve the course name
     void displayMessage(); // display a welcome message
-    void inputGrades(); // input three grades from user
-    void displayGradeReport(); // display a report based on the grades
-    int maximum( int, int, int ); // determine max of 3 values
+    void processGrades(); // perform various operations on the grade data
+    int getMinimum(); // find the minimum grade for the test
+    int getMaximum(); // find the maximum grade for the test
+    double getAverage(); // determine the average grade for the test
+    void outputBarChart(); // output bar chart of grade distribution
+    void outputGrades(); // output the contents of the grades array
 private:
-    string courseName; // course name for this GradeBook
-    int maximumGrade; // maximum of three grades
+    string courseName; // course name for this grade book
+    int grades[ students ]; // array of student grades
 }; // end class GradeBook
