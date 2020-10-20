@@ -1,19 +1,30 @@
-// Fig. 9.1: Time.h
-// Declaration of class Time.
+// Fig. 9.8: Time.h
+// Time class containing a constructor with default arguments.
 // Member functions are defined in Time.cpp
 
 // prevent multiple inclusions of header file
 #ifndef TIME_H
 #define TIME_H
 
-// Time class definition
+// Time abstract data type definition
 class Time
 {
 public:
-    Time(); // constructor
+    Time( int = 0, int = 0, int = 0 ); // default constructor
+
+    // set functions
     void setTime( int, int, int ); // set hour, minute and second
-    void printUniversal(); // print time in universal-time format
-    void printStandard(); // print time in standard-time format
+    void setHour( int ); // set hour (after validation)
+    void setMinute( int ); // set minute (after validation)
+    void setSecond( int ); // set second (after validation)
+
+    // get functions
+    int getHour(); // return hour
+    int getMinute(); // return minute
+    int getSecond(); // return second
+
+    void printUniversal(); // output time in universal-time format
+    void printStandard(); // output time in standar-time format 
 private:
     int hour; // 0 - 23 (24-hour clock format)
     int minute; // 0 - 59
