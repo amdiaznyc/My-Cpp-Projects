@@ -1,43 +1,21 @@
-// Fig. 9.9: Time.cpp
-// Member-function definitions for class Time.
-#include <iostream>
-#include <iomanip>
-#include "Time.h" // include definition of class Time from Time.h
-using namespace std;
+// Fig. 9.15: Time.cpp
+// Time class member-function definitions.
+#include "Time.h" // include definition of class Time
 
-// Time constructor initializes each data member to zero;
-// Ensures all Time objects start in a consistent state.
+// constructor function to initialize private data; calls member function
+// setTime to set variables; default values are 0 (see class definition)
 Time::Time( int hr, int min, int sec )
 {
-    setTime( hr, min, sec ); // validate and set time
+    setTime( hr, min, sec );
 } // end Time constructor
 
-// set new Time value using universal time; ensure that
-// the data remains consistent by setting invalid values to zero
+// set values of hour, minute and second
 void Time::setTime( int h, int m, int s )
 {
-    setHour( h ); // set private field hour
-    setMinute( m ); // set private field minute
-    setSecond( s ); // set private field second
-} // end function setTime
-
-// set hour value
-void Time::setHour( int h )
-{
     hour = ( h >= 0 && h < 24 ) ? h : 0; // validate hour
-} // end function setHour
-
-// set minute value
-void Time::setMinute( int m )
-{
     minute = ( m >= 0 && m < 60 ) ? m : 0; // validate minute
-} // end function setMinute
-
-// set second value
-void Time::setSecond( int s )
-{
     second = ( s >= 0 && s < 60 ) ? s : 0; // validate second
-} // end function setSecond
+} // end function setTime
 
 // return hour value
 int Time::getHour()
@@ -45,29 +23,9 @@ int Time::getHour()
     return hour;
 } // end function getHour
 
-// return minute value
-int Time::getMinute()
+// POOR PRACTICE: Returning a reference to a private data member.
+int &Time::badSetHour( int hh )
 {
-    return minute;
-} // end function getMinute
-
-// return second value
-int Time::getSecond()
-{
-    return second;
-} // end function getSecond
-
-// print Time in universal-time format (HH:MM:SS)
-void Time::printUniversal()
-{
-    cout << setfill( '0' ) << setw( 2 ) << hour << ":"
-        << setw( 2 ) << getMinute() << ":" << setw( 2 ) << getSecond();
-} // end function printUniversal
-
-// print Time in standard-time format (HH:MM:SS AM or PM)
-void Time::printStandard()
-{
-    cout << ( ( getHour() == 0 || getHour() == 12 ) ? 12 : getHour() % 12 )
-        << ":" <<  setfill( '0' ) << setw( 2 ) << getMinute()
-        << ":" << setw( 2 ) << getSecond() << ( hour < 12 ? " AM" : " PM" );
-} // end function printStandard
+    hour = ( hh >= 0 && hh < 24 ) ? hh : 0;
+    return hour; // DANGEROUS reference return
+} // end function badSetHour
