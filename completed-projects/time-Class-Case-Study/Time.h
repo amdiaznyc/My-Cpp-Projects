@@ -1,22 +1,32 @@
-// Fig. 9.14: Time.h
-// Time class declaration.
+// Fig. 10.1: Time.h
+// Time class definition with const member functions.
 // Member functions are defined in Time.cpp
-
-// prevent multiple inclusions of header file
-#ifndef TIME_H
+#ifndef TIME_H // prevent multiple inclusions of header file
 #define TIME_H
 
 class Time
 {
 public:
     Time( int = 0, int = 0, int = 0 ); // default constructor
-    void setTime( int, int, int ); // // set functions to set hour, minute and second
-    int getHour();
-    int &badSetHour( int ); // DANGEROUS reference return
+
+    // set functions
+    void setTime( int, int, int ); // set time
+    void setHour( int ); // set hour
+    void setMinute( int ); // set minute
+    void setSecond( int ); // set second
+
+    // get functions (normally declared const)
+    int getHour() const; // return hour
+    int getMinute() const; // return minute
+    int getSecond() const; // return second
+
+    // print functions (normally declared const)
+    void printUniversal() const; // print universal time
+    void printStandard(); // print standard time (should be const)
 private:
-    int hour;
-    int minute;
-    int second;
+    int hour; // 0 - 23 (24-hour clock format)
+    int minute; // 0 - 59
+    int second; // 0 - 59
 }; // end class Time
 
 #endif
