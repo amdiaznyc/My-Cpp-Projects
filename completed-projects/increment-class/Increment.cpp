@@ -1,16 +1,15 @@
-// Fig. 10.5: Increment.cpp
-// Member-function definitions for class Increment demonstrate using a
-// member initializer to initialize a constant of a built-in data type.
+// Fig. 10.8: Increment.cpp
+// Erroneous attempt to initialize a constant of a built-in data
+// type by assigment.
 #include <iostream>
 #include "Increment.h" // include definition of class Increment
 using namespace std;
 
-// constructor
+// constructor; constant member 'increment' is not initialized
 Increment::Increment( int c, int i )
-    : count( c ), // initializer for non-const member
-      increment( i ) // required initializer for const member
 {
-    // empty body
+    count = c; // allowed because count is not constant
+    increment = i; // ERROR: Cannot modify a const object
 }   // end constructor Increment
 
 // print count and increment values

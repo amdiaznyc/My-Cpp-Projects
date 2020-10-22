@@ -1,4 +1,4 @@
-// Fig. 10.4: Increment.h
+// Fig. 10.7: Increment.h
 // Definition of class Increment.
 #ifndef INCREMENT_H
 #define INCREMENT_H
